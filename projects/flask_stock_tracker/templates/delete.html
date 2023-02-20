@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Delete Record</h1>
+    <hr/>
+
+    <form method="post">
+      <div class="row mb-3">
+        <label for="date" class="col-sm-2 col-form-label"></h1>Date</label> 
+        <div class="col-sm-10">
+          <input disabled type="text" class="form-control" id="date" name="date" value="{{data[0] if data[0] else ''}}">
+        </div>
+      </div>
+      
+    
+      <div class="row mb-3">
+        <label for="open" class="col-sm-2 col-form-label">Open</label>
+        <div class="col-sm-10">
+          <input disabled type="text" class="form-control" id="open" name= "open" value="{{data[1] if data[1] else ''}}">
+        </div>
+      </div>
+    
+      <div class="row mb-3">
+        <label for="high" class="col-sm-2 col-form-label">High</label>
+        <div class="col-sm-10">
+          <input disabled type="text" class="form-control" id="high" name= "high" value="{{data[2] if data[2] else ''}}">
+        </div>
+      </div>
+    
+      <div class="row mb-3">
+        <label for="low" class="col-sm-2 col-form-label">Low</label>
+        <div class="col-sm-10">
+          <input disabled type="text" class="form-control" id="low" name= "low" value="{{data[3] if data[3] else ''}}">
+        </div>
+      </div>
+    
+      <div class="row mb-3">
+        <label for="close" class="col-sm-2 col-form-label">Close</label>
+        <div class="col-sm-10">
+          <input disabled type="text" class="form-control" id="close" name= "close" value="{{data[4] if data[4] else ''}}">
+        </div>
+      </div>
+    
+      <div class="row mb-3">
+        <label for="volumn" class="col-sm-2 col-form-label">Volume</label>
+        <div class="col-sm-10">
+          <input disabled type="text" class="form-control" id="volume" name= "volume" value="{{data[5] if data[5] else ''}}">
+        </div>
+      </div>
+      
+      <div class="row mb-3">
+        <div class="col-2"></div>
+        <div class="col-1" ><button type="submit" class="btn btn-success">Save</button></div>
+        <div class="col-1"><a href="/main" class="btn btn-secondary">Cancel</a></div>
+      </div>
+    </form>
+
+</div>
+
+{% endblock content %}
+
+
+

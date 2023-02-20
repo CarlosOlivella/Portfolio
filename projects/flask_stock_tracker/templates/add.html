@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Add Record</h1>
+    <hr/>
+
+    <form method="post">
+      <div class="row mb-3">
+        <label for="date" class="col-sm-2 col-form-label"></h1>Date</label> 
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="date" name="date">
+        </div>
+      </div>
+      
+    
+      <div class="row mb-3">
+        <label for="open" class="col-sm-2 col-form-label">Open</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="open" name= "open">
+        </div>
+      </div>
+    
+      <div class="row mb-3">
+        <label for="high" class="col-sm-2 col-form-label">High</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="high" name= "high">
+        </div>
+      </div>
+    
+      <div class="row mb-3">
+        <label for="low" class="col-sm-2 col-form-label">Low</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="low" name= "low">
+        </div>
+      </div>
+    
+      <div class="row mb-3">
+        <label for="close" class="col-sm-2 col-form-label">Close</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="close" name= "close">
+        </div>
+      </div>
+    
+      <div class="row mb-3">
+        <label for="volumn" class="col-sm-2 col-form-label">Volume</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="volume" name= "volume">
+        </div>
+      </div>
+      
+      <div class="row mb-3">
+        <div class="col-2"></div>
+        <div class="col-1" ><button type="submit" class="btn btn-success">Add</button></div>
+        <div class="col-1"><a href="/main" class="btn btn-secondary">Cancel</a></div>
+      </div>
+    </form>
+
+</div>
+
+{% endblock content %}
+
+
+

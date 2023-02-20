@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+<link href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
+
+
+<div class="container">
+
+    <h1>Stock Tracker</h1>
+    <hr/>
+
+    <form method = 'post' enctype=multipart/form-data>
+        <div class="mb-3">
+          <input class="form-control" type="file" id="datafile" name="datafile">
+        </div>
+  
+        <button type="submit" >Submit</button>
+  
+    </form>
+
+    <br>
+
+    <canvas id="myChart" width="900" height="400"></canvas>
+
+    <script>
+
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: {{ labels | safe }},
+                datasets: [
+                    {
+                        label: "Stock Value",
+                        data: {{ values | safe }},
+                        fill: false,
+                        borderColor: "rgb(75, 192, 192)",
+                        lineTension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: false
+            }
+
+        });
+    </script>
+
+    <br>
+    <br>
+    <br>
+
+    <table id="mytable" class="table">
+      
+        <thead>
+            <tr>
+            <th>Date</th>
+            <th>Open</th>
+            <th>High</th>
+            <th>Low</th>
+            <th>Close</th>
+            <th>Volume</th>
+            <th><a href="/add"><button class="btn btn-warning" type="button">Add New</button></a></th>
+            <th><a href="/download"><button class="btn btn-success" type="button">Download</button></a></th>
+          </tr>            
+        </thead>
+  
+        <tbody>
+  
+          {% for row in data %}
+          <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            <td>{{row[4]}}</td>
+            <td>{{row[5]}}</td>
+            <th><a href="/edit/{{row[0]}}"><button class="btn btn-primary" type="button">Edit</button></a></th>
+            <th><a href="/delete/{{row[0]}}"><button class="btn btn-danger" type="button">Delete</button></a></th>
+
+          </tr>
+          {% endfor %}
+  
+        </tbody>
+  
+        <tfoot>
+          <tr>
+            <th>Date</th>
+            <th>Open</th>
+            <th>High</th>
+            <th>Low</th>
+            <th>Close</th>
+            <th>Volume</th>
+            <th></th>
+            <th></th>
+              </tr>
+        </tfoot>
+  
+      </table>
+
+      <br>
+      <br>
+
+  
+    
+</div>
+
+<script
+src="https://code.jquery.com/jquery-3.6.1.min.js"
+integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+
+<script>
+  $(document).ready( function () {
+    $('#mytable').DataTable();
+  } );
+</script>
+
+
+{% endblock content %}
+
+
+

@@ -1,0 +1,741 @@
+---
+title: "Bellabeat Data Analysis Report"
+author: "Carlos Olivella"
+date: "1/20/2022"
+output: github_document
+---
+
+<style>
+body {
+text-align: justify}
+</style>
+
+# 1. INTRODUCTION
+
+**Bellabeat** is a high-tech manufacturer of heath-focused products for women that provide users with health data related to their activity, sleep, stress, menstrual cycle, and mindfulness habits. The **marketing analytics team** at Bellabeat has been assigned the task of analyzing smart device fitness data to identify connections, themes, and patterns and provide Bellabeat executive team with useful insights into how consumers are using Bellabeat products and, in turn, help guide the company's marketing strategy to unlock new growth opportunities. As such, this report will be divided into sections, each one corresponding to a phase of the data analysis life cycle.
+
+The first section will analyze how we can **Ask** smart questions and use structured thinking to identify what we are looking for, what data we will need, how we will obtain this data, and how we will analyze this data. The second section will analyze how we can **Prepare** and collect the required data from adequate and reliable sources. The third section will focus on how we will **Process** the collected data and clean it to avoid errors and bias in our analysis. The fourth section will center around how we will **Analyze** the cleaned data and perform calculations on it to identify connections, themes, and patterns that will help us obtain new insights and leverage these to make meaningful change throughout the company. It will also explain how we plan to **Share** our findings with key stakeholders through presentations, reports, or dashboards. Finally, the fifth section will focus on our recommendations for how Bellabeat should **Act** on our findings to unlock new growth opportunities.
+
+This report will produce the following deliverables:
+
+1.	A clear summary of the business task
+2.	A description of all data sources used
+3.	Documentation of any cleaning or manipulation of data
+4.	A summary of our analysis
+5.	Supporting visualizations and key findings
+6.	Our top high-level content recommendations based on our analysis
+
+# 2. ASK Phase
+
+In this section of our report, we will focus on summarizing the business task that we plan to address with our analysis, the questions we plan to resolve, and how we plan to consider key stakeholders.
+
+A business task can be defined as *“the question or problem data analysis resolves for a business”* (Google, n.d). In this case we have been assigned the task of analyzing smart device usage data to identify trend, connections, and patterns in consumer behavior regarding sleep, activity, and body measurements. Our analysis will allow us to obtain insights on smart device usage and help identify new growth opportunities for Bellabeat through data-driven decision making.
+
+To resolve these business tasks through data analysis, we must first distill what we are trying to answer into specific questions. Some general questions that we will use as guidelines for our analysis throughout this report will be those proposed by Google (i.e., **What are some trends in smart device usage?, how could these trends apply to Bellabeat customers?**, and **how could these trends help influence Bellabeat marketing strategy?**). However, we must also determine specific questions that we intend to answer. On this matter, we will use the SMART questions framework. This framework states that useful and effective questions must be specific, measurable, action-oriented, relevant, and time-bound. The following list includes the general questions that we intend to answer throughout this report, an analysis of the questions from the point of view of the SMART framework, and an initial hypothesis on what the answers to the questions might be.
+
+**1.	How is smart device usage distributed among user types based on their activity level?** 
+
+**Specific**: This question addresses the business tasks we are trying to solve because it will help us identify how users are using their smart devices based on their activity levels.
+
+**Measurable**: This question is measurable because it will provide us with percentages of smart device usage across the sampled population.
+
+**Action-Oriented**: The insights gained from resolving this question will allow Bellabeat to identify which activity-level segments of the population should be focused on, meaning that Bellabeat can target these segments with tailored marketing strategies.
+
+**Relevant**: This question is relevant because it relates to analyzing consumer behavior and, specifically, smart device usage across activity levels.
+
+**Time-Bound**: This question is time-bound given that it is limited to the sampled time period.
+
+**Hypothesis**: Our hypothesis is that the majority of users are physically active. 
+
+**2.	How is smart device usage distributed between BMI (body mass index) segments?**
+
+**Specific**: This question addresses the business tasks we are trying to solve because it will help us identify what BMI segments are using Bellabeat products more, and which age segments Bellabeat should focus on attracting.
+
+**Measurable**: This question is measurable because it will provide us with percentages of smart device usage across the sampled population.
+
+**Action-Oriented**: As stated above, the insights gained from resolving this question will allow Bellabeat to identify which BMI segments of the population should be focused on, meaning that Bellabeat can target these segments with tailored marketing strategies.
+
+**Relevant**: This question is relevant because it relates to analyzing consumer behavior and, specifically, smart device usage across BMI segments.
+
+**Time-Bound**: This question is time-bound given that it is limited to the sampled time period.
+
+**Hypothesis**: Our hypothesis is that smart device usage is concentrated in overweight individuals, meaning those individuals with a BMI between 25.0 and 30.0, as defined by the Center for Disease Control and Prevention (CDC, 2021).
+
+**3. How do the total amount of steps or calories affect said user's average sleep state?**
+
+**Specific**: This question addresses the business tasks we are trying to solve because it will help us identify how sleep is affected by activity and caloric intake.
+
+**Measurable**: This question is measurable because it will provide us with a specific correlation between the two variables.
+
+**Action-Oriented**: As stated above, the insights gained from resolving this question will allow Bellabeat to communicate these findings to their users in order to improve their sleep.
+
+**Relevant**: This question is relevant because it relates to analyzing consumer behavior and, specifically, the effect of activity and caloric intake on sleep.
+
+**Time-Bound**: This question is time-bound given that it is limited to the sampled time period.
+
+**Hypothesis**: Our hypothesis is there is a negative correlation between the amount of steps/calories and sleep quality/state.
+
+**4. How do daily steps and calories vary between weekdays and weekends?**
+
+**Specific**: This question addresses the business tasks we are trying to solve because it will help us identify how users behave during different parts of the week.
+
+**Measurable**: This question is measurable because it will provide us with numeric differences between weekdays and weekends.
+
+**Action-Oriented**: As stated above, the insights gained from resolving this question will allow Bellabeat to identify how users behave in different parts of the week, which can allow Bellabeat to inform their users of their behavioral changes and how this might affect them.
+
+**Relevant**: This question is relevant because it relates to analyzing consumer behavior and, specifically, user behavior usage across time.
+
+**Time-Bound**: This question is time-bound given that it is limited to the sampled time period.
+
+**Hypothesis**: Our hypothesis is that during weekdays users take more steps but consume less calories due to the fact that human beings usually maintain stricter and more predictable routines during weekdays, whilst consumer behavior is more erratic and users rest more during weekends.
+
+**5. When are users more active throughout the day?**
+
+**Specific**: This question addresses the business tasks we are trying to solve because it will help us identify how users behave during different parts of the day.
+
+**Measurable**: This question is measurable because it will provide us with numeric differences between hours.
+
+**Action-Oriented**: As stated above, the insights gained from resolving this question will allow Bellabeat to identify how users behave in different parts of the day, which can allow Bellabeat to inform their users of their behavioral changes and how this might affect them.
+
+**Relevant**: This question is relevant because it relates to analyzing consumer behavior and, specifically, user behavior usage across time.
+
+**Time-Bound**: This question is time-bound given that it is limited to the sampled time period.
+
+**Hypothesis**: Our hypothesis is that users are more active in the morning.
+
+**6. Do individuals that use their smart devices less often have higher daily average steps during these uses?**
+
+**Specific**: This question addresses the business tasks we are trying to solve because it will help us identify if there is a concentration of smart device usage during periods of exercise or high activity.
+
+**Measurable**: This question is measurable because it will provide us with numeric differences between usage types.
+
+**Action-Oriented**: As stated above, the insights gained from resolving this question will allow Bellabeat to identify if there is a concentration of smart device usage during periods of exercise or high activity. This could help the company tailor marketing strategies emphasizing the usefulness of wearing smart devices every day.
+
+**Relevant**: This question is relevant because it relates to analyzing smart device usage across different types of users and activity levels.
+
+**Time-Bound**: This question is time-bound given that it is limited to the sampled time period.
+
+**Hypothesis**: Our hypothesis is that users who wear their smart devices less often usually have higher average daily steps, thus there is a concentration of smart device usage during periods of exercise or high activity.
+
+We believe that these questions will allow us to obtain insights into smart device usage and unlock new growth opportunities that will help Bellabeat make meaningful changes in its marketing strategies to attract new customers and improve the experience of current customers.
+
+Another important aspect that we must consider throughout this analysis is stakeholder integration. In this specific case, we must address three distinct stakeholders: (i) Urška Sršen, Bellabeat’s cofounder and Chief Creative Officer; (ii) Sando Mur, Mathematician, Bellabeat’s cofounder, and key member of the Bellabeat executive team; and (iii) Bellabeat’s marketing analytics team. As such, we must tailor our findings to the specific needs of each of these stakeholders.
+
+# 3. PREPARE Phase
+
+This section of our report will focus on describing the data sources that we plan to use in our analysis, how reliable they may be, as well as the possibility of bias being a part of the data.
+
+As is stated in the case study, Urška Sršen has directed us to the use of the ‘Fitbit Fitness Tracker Data’ dataset. Below, we will identify key elements of this dataset:
+
+* **Source**: This dataset has been retrieved from the following link on Kaggle: https://www.kaggle.com/arashnic/fitbit. However, the original source of the data can be found on the following link from Zenodo: https://zenodo.org/record/53894#.YeW2exPMLPZ. The original authors or creators are Furberg, Robert; Brinton, Julia; Keating, Michael; Ortiz, Alexa.
+
+* **Accessibility and Licensing**: This dataset can be accessed by anyone given that it is CC0: public domain. This means that *“a third party may copy, distribute, display/perform, sell, and create derivative works of the original creation. (…) Works committed to the public domain via CC0, do NOT require an attribution of any kind, any work in the public domain may be used without attribution”* (UNT, 2021).
+
+* **Anonymization**: The data set is anonymized, and no personally identifiable information is included. It is not possible to link this data to specific individuals, therefore no data privacy laws are infringed.
+
+* **Content**: This data set contains information from approximately 30 eligible Fitbit users that consented to the submission of personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring (Möbius, n.d.). It contains 18 tables with information on activity, calories, intensities, heart rate, sleep, and weight, often distributed by days, hours, and minutes.
+
+* **Limitations**: This dataset has several limitations that we must address:
+
+  + **Gender**: There is no mention of the gender of the individuals who consented to submit their personal information. As such, we cannot know, nor assume if the participants are all women or not. This is an important limitation for our analysis because Bellabeat’s products are created for use by women. This limitation can lead to bias within our data because we may be analyzing data on men, which can be significantly different to that of women.
+
+  + **Age**: There is also no mention of the age of the participants. This means that it is possible that we may be analyzing data of only a specific age segment of the population, which would not represent the entire population and, in turn, would make it impossible to give recommendations to Bellabeat based on age.
+
+  + **Location**: There is no mention of the time zone or location in which this data was collected. This could lead to bias on the basis of location-specific differences in anatomy, fitness levels, race, ethnicity, among others.
+
+  + **ROCCC**: As we can see above, this dataset has certain limitations. Given that the data is generated by Fitbit, we can argue that it is reliable and is validated from the original source. As for how comprehensive the data is, we have seen that there is no information on gender, age, or location of the participants. Therefore, we cannot say that it is comprehensive as it does not include all the information we require to answer our questions. The dataset is also not current because the collected data is from the year 2016. Finally, in terms of the dataset being cited, it is of the public domain, therefore no attribution is required as explained previously.
+
+Unfortunately, it was not possible to find other datasets on smart health device usage due to the fact that companies do not usually make this information public, nor have the obligation to do so. For this reason, we must carry out our analysis with the provided dataset, always taking into account its limitations and biases.
+
+# 4. PROCESS Phase
+
+To process the data for subsequent analysis, we will use RStudio. Microsoft Excel or Google Cloud Big Query could have been used instead, but, for the purposes of this, project RStudio provides the necessary tools in a single platform, especially considering the amount of data included in some of the CSV files.
+
+## 4.1 Installing packages and opening libraries
+
+During this data analysis project we will used the following packages within RStudio:
+
+* tidyverse
+* skimr
+* janitor
+* lubridate
+* ggpubr
+* ggrepel
+
+```{r collapse = FALSE}
+library(tidyverse)
+library(skimr)
+library(janitor)
+library(lubridate)
+library(ggpubr)
+library(ggrepel)
+```
+
+## 4.2 Importing the datasets
+
+The dataset we have been directed to contains 18 CSV files. However, we will not used all of them in our analysis. As such, we will only import the following files:
+
+* activity_daily
+* heartrate_seconds
+* sleep_daily
+* sleep_minutes
+* steps_hourly
+* weight_logs
+
+```{r importing csv files}
+setwd("/Users/carlosolivella/Library/Mobile Documents/com~apple~CloudDocs/MASY/Fall 2021/Google Certificate - Data Analyst/Capstone Project/FitBit Data/To import")
+activity_daily <- read_csv(file= "/Users/carlosolivella/Library/Mobile Documents/com~apple~CloudDocs/MASY/Fall 2021/Google Certificate - Data Analyst/Capstone Project/FitBit Data/To import/activity_daily.csv")
+heartrate_seconds <- read_csv(file= "/Users/carlosolivella/Library/Mobile Documents/com~apple~CloudDocs/MASY/Fall 2021/Google Certificate - Data Analyst/Capstone Project/FitBit Data/To import/heartrate_seconds.csv")
+sleep_daily <- read_csv(file= "/Users/carlosolivella/Library/Mobile Documents/com~apple~CloudDocs/MASY/Fall 2021/Google Certificate - Data Analyst/Capstone Project/FitBit Data/To import/sleep_daily.csv")
+sleep_minutes <- read_csv(file= "/Users/carlosolivella/Library/Mobile Documents/com~apple~CloudDocs/MASY/Fall 2021/Google Certificate - Data Analyst/Capstone Project/FitBit Data/To import/sleep_minutes.csv")
+steps_hourly <- read_csv(file= "/Users/carlosolivella/Library/Mobile Documents/com~apple~CloudDocs/MASY/Fall 2021/Google Certificate - Data Analyst/Capstone Project/FitBit Data/To import/steps_hourly.csv")
+weight_logs <- read_csv(file= "/Users/carlosolivella/Library/Mobile Documents/com~apple~CloudDocs/MASY/Fall 2021/Google Certificate - Data Analyst/Capstone Project/FitBit Data/To import/weight_logs.csv")
+```
+
+## 4.3 Previewing the data
+
+Now that we have imported the files, we will preview the data and its structure.
+
+```{r previewing the data}
+as_tibble(activity_daily)
+str(activity_daily)
+as_tibble(heartrate_seconds)
+str(heartrate_seconds)
+as_tibble(sleep_daily)
+str(sleep_daily)
+as_tibble(sleep_minutes)
+str(sleep_minutes)
+as_tibble(steps_hourly)
+str(steps_hourly)
+as_tibble(weight_logs)
+str(weight_logs)
+```
+
+## 4.4 Cleaning and formatting
+
+We will now clean the data to eliminate any errors or inconsistencies, and format it so that it can be easily used later during analysis.
+
+### 4.4.1 Duplicates and N/A
+
+We will look for any duplicates.
+
+```{r identifying and removing duplicates}
+sum(duplicated(activity_daily))
+sum(duplicated(heartrate_seconds))
+sum(duplicated(sleep_daily))
+sum(duplicated(sleep_minutes))
+sum(duplicated(steps_hourly))
+sum(duplicated(weight_logs))
+```
+
+Now we will remove the duplicates and N/A.
+
+```{r removing duplicates and N/A}
+activity_daily <- activity_daily %>% 
+  distinct() %>% 
+  drop_na()
+
+heartrate_seconds <- heartrate_seconds %>% 
+  distinct() %>% 
+  drop_na()
+
+sleep_daily <- sleep_daily %>% 
+  distinct() %>% 
+  drop_na()
+
+sleep_minutes <- sleep_minutes %>% 
+  distinct() %>% 
+  drop_na()
+
+steps_hourly <- steps_hourly %>% 
+  distinct() %>% 
+  drop_na()
+
+weight_logs <- weight_logs %>% 
+  distinct()
+```
+Note that we are not using *drop_na()* for *weight_logs* because its *fat* column only contains two values so most of the data frame would be dropped. In later sections, we will drop remove the *fat* column.
+
+Now we will verify that duplicates have been removed.
+
+```{r verifying that duplicates have been removed}
+sum(duplicated(activity_daily))
+sum(duplicated(heartrate_seconds))
+sum(duplicated(sleep_daily))
+sum(duplicated(sleep_minutes))
+sum(duplicated(steps_hourly))
+sum(duplicated(weight_logs))
+```
+
+### 4.4.2 Formatting columns, dates, and times
+
+Now we will clean the column names so that each column name is in lower case and snake case.
+
+```{r cleaning and renaming columns}
+activity_daily <- clean_names(activity_daily)
+heartrate_seconds <- clean_names(heartrate_seconds)
+sleep_daily <- clean_names(sleep_daily)
+sleep_minutes <- clean_names(sleep_minutes)
+steps_hourly <- clean_names(steps_hourly)
+weight_logs <- clean_names(weight_logs)
+```
+
+We are also going to merge the *activity_daily* and *sleep_daily* data frames given that they contain data that can be joined based on their common time frame. However, before we merge these data frames we will rename the corresponding date columns and format them as dates.
+
+```{r formatting date columns}
+activity_daily <- activity_daily %>% 
+  rename(date = activity_date) %>% 
+  mutate(date = as_date(date, format = "%m/%d/%Y"))
+
+sleep_daily <- sleep_daily %>% 
+  rename(date = sleep_day) %>% 
+  mutate(date = as_date(date, format = "%m/%d/%Y %I:%M:%S %p" , tz = Sys.timezone()))
+```
+
+We will also make some changes to the remaining data frames such as formatting the *date* columns as date_time given that they include specific times.
+
+We will rename the *value* column in the *heartrate_seconds* data frame to *heart_rate*, and the *time* column to *date_time*.
+
+```{r changes to heartrate_seconds}
+heartrate_seconds <- heartrate_seconds %>% 
+  rename(heart_rate = value, date_time = time) %>% 
+  mutate(date_time = as.POSIXct(date_time, format = "%m/%d/%Y %I:%M:%S %p" , tz = Sys.timezone()))
+```
+
+We will drop the *log_id* column in the *sleep_minutes* data frame because we have no use for it, and will rename the *value* column to *sleep_state* given that this is what it specifically represents according to the dataset's metadata. This states that value of 1 = asleep, a value of 2 = restless, and a value of 3 = awake. We will also rename the *date* column to *date_time*.
+
+```{r changes to sleep_minutes}
+sleep_minutes <- subset(sleep_minutes, select = -c(log_id)) %>% 
+  rename(sleep_state = value, date_time = date) %>% 
+  mutate(date_time = as.POSIXct(date_time, format = "%m/%d/%Y %I:%M:%S %p" , tz = Sys.timezone()))
+```
+
+We will also rename the *activity_hour* column in the *steps_hourly* data frame to *date*, and rename the *step_total* column to *total_steps*.
+
+```{r changes to steps_hourly}
+steps_hourly <- steps_hourly %>% 
+  rename(date_time = activity_hour, total_steps = step_total) %>%
+  mutate(date_time = as.POSIXct(date_time, format = "%m/%d/%Y %I:%M:%S %p" , tz = Sys.timezone()))
+```
+
+Finally, we will drop the *fat*, *is_manual_report* and *log_id* columns from the *weight_logs* data frame because *fat* only contains two values, and the other two columns are of no use to us.
+
+```{r changes to weight_logs}
+weight_logs <- subset(weight_logs, select = -c(fat, is_manual_report, log_id)) %>% 
+  rename(date_time = date) %>%
+  mutate(date_time = as.POSIXct(date_time, format = "%m/%d/%Y %I:%M:%S %p" , tz = Sys.timezone()))
+```
+
+Now that we have finished these steps, we will now check that everything has been done correctly.
+
+```{r checking work}
+head(activity_daily)
+head(heartrate_seconds)
+head(sleep_daily)
+head(sleep_minutes)
+head(steps_hourly)
+head(weight_logs)
+```
+
+### 4.4.3 Merging datasets
+
+Now we can proceed to merge the *activity_daily* and *sleep_daily* data frames.
+
+```{r}
+daily_data_merged <- merge(activity_daily, sleep_daily, by = c("id", "date"))
+glimpse(daily_data_merged)
+```
+
+# 5. ANALYZE & SHARE Phase
+
+Having processed, cleaned, and formatted all of the data that we will use during this project, we will now proceed to perform calculations on this data and analyze it.
+
+## 5.1 Types of users per activity level
+
+No information on age or gender was provided with this dataset. As such, we will categorize users based on their activity level. We will use the following categories proposed by Tudor-Locke & Bassett (2004):
+
+  Step per Day    |   Classification
+  ----------------|-----------------
+  <5000           |   Sedentary
+  5000-7499       |   Physically Inactive
+  7500-9999       |   Moderately Active
+  ≥10,000         |   Physically Active
+  ≥12,500         |   Very Active
+
+Now, we will calculate each user's daily average steps.
+
+```{r calculate daily average steps}
+daily_avg_steps <- daily_data_merged %>% 
+  group_by(id) %>% 
+  summarise(daily_avg_steps = mean(total_steps))
+
+daily_avg_steps
+```
+
+We will categorize each user in a specific activity level according to their daily average steps.
+
+```{r categorizing users}
+user_type <- daily_avg_steps %>% 
+  mutate(user_type = case_when(
+    daily_avg_steps < 5000 ~ "sedentary",
+    daily_avg_steps >= 5000 & daily_avg_steps < 7500 ~ "physically inactive",
+    daily_avg_steps >= 7500 & daily_avg_steps < 10000 ~ "moderately active",
+    daily_avg_steps >= 10000 & daily_avg_steps < 12500 ~ "physically active",
+    daily_avg_steps >= 12500 ~ "very active"
+  ))
+
+head(user_type)
+```
+
+Now, we will calculate the percentages of user types.
+
+```{r calculating percentages of user types}
+user_type_percentages <- user_type %>% 
+  group_by(user_type) %>% 
+  summarize(total_users = n_distinct(id)) %>% 
+  mutate(percentage = (total_users/sum(total_users))*100)
+
+head(user_type_percentages)
+```
+
+We will create a pie chart to represent these percentages.
+
+```{r plotting pie chart}
+user_type_pie_chart <- ggplot(user_type_percentages, aes(x = "", y = percentage, fill = user_type)) +
+  geom_col(color = "black") +
+  coord_polar(theta = "y") +
+  labs(title = "Distribution of User Types", x = "", y = "") +
+  theme(axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        axis.text = element_blank(),
+        plot.title = element_text(hjust = 0.5, face = "bold"),
+        panel.background = element_blank(),
+        legend.title = element_text(hjust = 0.5, face = "bold")) +
+  geom_text(aes(label = round(percentage, 1)),
+            position = position_stack(vjust = 0.5)) +
+  guides(fill = guide_legend(title = "User Type"))
+
+user_type_pie_chart
+```
+
+**Observations:**
+
+* User types are fairly distributed, except for *very active* users.
+* This can mean that individuals are using their smart devices throughout their entire days, and not just when they are doing exercise.
+* Our hypothesis that the majority of users were physically active was incorrect.
+
+## 5.2 BMI
+
+We can also plot users' BMIs on a histogram to see their distribution.
+
+```{r plotting BMI on a scatterplot}
+weight_histogram <- ggplot(weight_logs, aes(x = bmi)) +
+  geom_histogram(binwidth = 1, color = "white", fill = "#006699") +
+  labs(title = "Distribution of users' BMI", x = "Body Mass Index", y = "Number of Users") +
+  geom_vline(aes(xintercept=mean(bmi)),color = "black", size = 1) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+
+weight_histogram
+```
+
+**Observations:**
+
+* The average body mass index of the users whose data was collected, represented by the vertical line, is `r mean(weight_logs$bmi)`. According to the CDC, a BMI between 18.5 and 24.9 is considered healthy weight for adults. Therefore, we can state that most of the individuals who use these smart devices are overweight or in the upper limits of healthy weight when using them. This observation, along with many others that will be mentioned throughout this report, cannot be fully trusted given that we do not have any information on the age or gender of the users.
+* Our hypothesis that the majority of users would be overweight was correct.
+
+## 5.3 Steps vs. Sleep State
+
+We are interested in analyzing how the total amount of steps taken in a day can affect a user's average sleep state. Therefore, we will compare *sleep_state* from the *sleep_minutes* data frame and *total_steps* from the *activity_daily* data frame. However, we must first calculate the average sleep state per day per user given that the information is currently divided by minutes.
+
+```{r calculating avg sleep state per day per user}
+avg_sleep_state_per_day <- sleep_minutes %>%
+  rename(date = date_time) %>% 
+  mutate(date = as_date(date, tz=Sys.timezone())) %>% 
+  group_by(id, date) %>% 
+  summarize(avg_sleep_state = mean(sleep_state))
+
+
+(avg_sleep_state_per_day)
+```
+
+We must combine the two variables in a single data frame.
+
+```{r combining variables in a single data frame}
+sleep_state_vs_total_steps <- merge(avg_sleep_state_per_day, activity_daily, by = c("id", "date")) %>% select(id, date, avg_sleep_state, total_steps) %>%
+  mutate(user_type = case_when(
+    total_steps < 5000 ~ "sedentary",
+    total_steps >= 5000 & total_steps < 7500 ~ "physically inactive",
+    total_steps >= 7500 & total_steps < 10000 ~ "moderately active",
+    total_steps >= 10000 & total_steps < 12500 ~ "physically active",
+    total_steps >= 12500 ~ "very active"))
+
+head(sleep_state_vs_total_steps)
+```
+
+Now, we can compare *avg_sleep_state* and *total_steps* together on a scatterplot.
+
+```{r plotting sleep state vs. total steps}
+ggplot(sleep_state_vs_total_steps, aes(x = total_steps, y = avg_sleep_state)) +
+  geom_point(aes(color=user_type)) +
+  geom_smooth() +
+  labs(title = "Sleep State vs. Total Steps", x = "Total Steps", y = "Avg. Sleep State") +
+  theme(plot.title = element_text(face="bold", hjust = 0.5),
+        legend.title = element_text(hjust = 0.5, face = "bold")) +
+  guides(fill = guide_legend(title = "User Type"))
+  
+```
+
+**Observations:**
+
+* There is no correlation between the total steps taken in a day and the user's sleep state.
+* Our hypothesis that there is a negative correlation between the amount of steps and sleep quality/state was incorrect.
+
+## 5.4 Calories vs. Sleep State
+
+Now we will analyze whether differences in caloric intake have an effect on the user's average sleep state.
+
+```{r merging calories with avg_sleep_state}
+sleep_state_vs_calories <- merge(avg_sleep_state_per_day, activity_daily, by = c("id", "date")) %>% select(id, date, avg_sleep_state, calories)
+
+head(sleep_state_vs_calories)
+```
+
+We can now plot the relationship between the two variables.
+
+```{r plotting sleep state vs. calories}
+ggplot(sleep_state_vs_calories, aes(x = calories, y = avg_sleep_state)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Sleep State vs. Calories", x = "Total Calories", y = "Avg. Sleep State") +
+  theme(plot.title = element_text(face = "bold", hjust = 0.5))
+  
+```
+
+**Observations:**
+
+* There is no correlation between caloric intake and average sleep state. If anything, users tend to be slightly more restless in some cases when caloric intake is around 1500 calories.
+* Our hypothesis that there is a negative correlation between the amount of calories and sleep quality/state was incorrect.
+
+## 5.5 Weekdays vs. Weekends
+
+We also wish to gain some insights into how users' behaviors change depending on whether its a weekday or a weekend. To carry out this analysis, we must create a data frame that adds two columns to the *activity_daily* data frame: (i) a column that specifies the specific day of the week for the corresponding observation; and (ii) for the purposes of simplifying the results for later analysis, a column that states *weekday* if the day is Monday, Tuesday, Wednesday, Thursday, and Friday, and *weekend* if its Saturday or Sunday.
+
+```{r creating data frame Weekdays vs. Weekends}
+weekdays_vs_weekends <- activity_daily %>% 
+  mutate(day = weekdays(date), weekday_or_weekend = case_when(
+    day == "Monday" ~ "weekday",
+    day == "Tuesday" ~ "weekday",
+    day == "Wednesday" ~ "weekday",
+    day == "Thursday" ~ "weekday",
+    day == "Friday" ~ "weekday",
+    TRUE ~ "weekend")) %>% select(id, date, day, weekday_or_weekend, everything())
+
+weekdays_vs_weekends
+```
+
+Now we can summarize the data frame.
+
+```{r summarizing data frame}
+avg_weekdays_vs_weekends <- weekdays_vs_weekends %>% 
+  group_by(weekday_or_weekend) %>% 
+  summarize(avg_steps = mean(total_steps), avg_calories = mean(calories))
+
+avg_weekdays_vs_weekends
+```
+
+We will now plot this data frame.
+
+```{r plotting data frame}
+ggarrange(
+  ggplot(avg_weekdays_vs_weekends, aes(x = weekday_or_weekend, y = avg_steps, fill = weekday_or_weekend)) +
+  geom_col(color = "black", ) +
+  labs(title = "Avg. Steps per Week Section", subtitle = "Weekdays vs. Weekends", x = "Section of Week", y = "Avg. Steps") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        plot.subtitle = element_text(hjust = 0.5),
+        legend.title = element_text(hjust = 0.5, face = "bold"), legend.position = "none") +
+  guides(fill = guide_legend(title = "Week Section")),
+  ggplot(avg_weekdays_vs_weekends, aes(x = weekday_or_weekend, y = avg_calories, fill = weekday_or_weekend)) +
+    geom_col(color = "black", ) +
+  labs(title = "Avg. Calories per Week Section", subtitle = "Weekdays vs. Weekends", x = "Section of Week", y = "Avg. Calories") +
+  theme(plot.title = element_text(hjust=0.5, face = "bold"),
+        plot.subtitle = element_text(hjust = 0.5),
+        legend.title = element_text(hjust = 0.5, face = "bold")) +
+  guides(fill = guide_legend(title = "Week Section"))
+  )
+    
+```
+
+**Observations:**
+
+* Our hypothesis was correct. During the week, users take more steps. This is coherent with the fact that, in general, users work during weekdays and move around more (pre-pandemic era). Individuals usually rest more on weekends. However, caloric intake is higher on weekends. This is also expected due to the fact that individuals usually maintain healthier and more strict diets during the week, and relax a bit during weekends.
+* Differences in results between weekdays and weekends are minimal and do not provide meaningful distinctions
+
+## 5.6 Most active hours of the day
+
+We will analyze the activity of the users throughout different hours of the day based on their hourly steps. First, we must summarize the *steps_hourly* data frame.
+
+```{r summarizing steps_hourly data frame}
+avg_steps_hourly <- steps_hourly %>%
+  separate(date_time, into = c("date", "time"), sep = " ") %>%
+  mutate(date = ymd(date))
+
+head(avg_steps_hourly)
+```
+
+Now we can plot the different hours of the day on a bar graph.
+
+```{r plotting bar graph}
+avg_steps_hourly %>% 
+  group_by(time) %>% 
+  summarize(avg_steps = mean(total_steps)) %>% 
+  ggplot(aes(x = time, y = avg_steps, fill = avg_steps)) +
+  geom_col() +
+  labs(title = "Average Steps throughout the Day", x = "Time", y = "Avg. Steps") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        legend.title = element_text(hjust = 0.5, face = "bold"),
+        axis.text.x = element_text(angle = 90)) +
+  guides(fill = guide_legend(title = "Avg. Steps"))
+  
+```
+
+**Observations:**
+
+* As expected, users are less active between 11 pm and 6 am due to sleep.
+* Users have a significant drop in activity around 3 pm. This may be due to this is usually around the time when digestion of food takes place after lunch and individuals feel more tired and lethargic.
+* Users are most active between 6 and 7 pm.
+* Our hypothesis that users are more active in the morning was incorrect.
+
+## 5.7 Usage vs. Average Daily Steps
+
+Now, we will test the following hypothesis: that individuals who use their smart devices less days during the month have higher average daily steps because they generally use their smart devices on days when they are exercising. To carry out this test, we must first segment users based on how many days per month they use their smart device.
+
+We will create Usage Types based on the following criteria:
+
+* Low Use: 1 to 14 days
+* Moderate Use: 15 to 21 days
+* High Use: 22 to 31 days
+
+Days that have less than 200 steps will not be counted.
+
+Given that we will later analyze if there is a correlation between usage and average daily steps, we will also join the *daily_avg_steps* data frame to our *usage_types* data frame based on the user's *id*.
+
+```{r }
+usage_types <- activity_daily %>% 
+  filter(total_steps >200) %>% 
+  group_by(id) %>% 
+  summarize(days_used = sum(n())) %>% 
+  mutate(use_type = case_when(
+    days_used >= 1 & days_used <= 14 ~ "Low Use",
+    days_used >= 15 & days_used <= 21 ~ "Moderate Use",
+    days_used >= 22 & days_used <= 31 ~ "High Use")) %>% 
+  mutate(use_type = factor(use_type, ordered = TRUE, level = c('Low Use', 'Moderate Use', 'High Use'))) 
+
+head(usage_types)
+```
+
+Now we will create a summary table to see the percentage of each use type.
+
+```{r summarizing table}
+usage_types_summary <- usage_types %>% 
+  group_by(use_type) %>% 
+  summarize(users = sum(n())) %>% 
+  mutate(percentage = (users/sum(users))*100)
+
+head(usage_types_summary)
+```
+
+We will now plot this on a pie chart.
+
+```{r plotting pice chart}
+ggplot(usage_types_summary, aes(x = "", y = percentage, fill = use_type)) +
+  geom_col(color = "black") +
+  coord_polar(theta = "y") +
+  scale_fill_brewer(palette = 'Pastel2') +
+  labs(title = "Distribution of Usage Types", x = "", y = "") +
+  theme(axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        axis.text = element_blank(),
+        plot.title = element_text(hjust = 0.5, face = "bold"),
+        panel.background = element_blank(),
+        legend.title = element_text(hjust = 0.5, face = "bold")) +
+  geom_text(aes(label = round(percentage, 1)),
+            position = position_stack(vjust = 0.5)) +
+  guides(fill = guide_legend(title = "Usage Type"))
+```
+
+**Observations:**
+
+* Most of the users use their smart devices between 22 and 31 days. This implies that users like, or at least understand that constant use enhances the utility of, their smart devices. 
+
+Having categorized users by the amount of days they wear their smart devices, we can now analyze if there is a correlation between usage and average daily steps. To do this, we must join the *daily_avg_steps* data frame to our *usage_types* data frame based on the user's *id*. We did not carry out this step when we initially created the *usage_types* data frame because we only have data on the daily average steps of 24 users, which would reduce our current sample of 33 users.
+
+```{r }
+usage_types_vs_steps <- activity_daily %>% 
+  filter(total_steps >200) %>% 
+  group_by(id) %>% 
+  summarize(days_used = sum(n())) %>% 
+  mutate(use_type = case_when(
+    days_used >= 1 & days_used <= 14 ~ "Low Use",
+    days_used >= 15 & days_used <= 21 ~ "Moderate Use",
+    days_used >= 22 & days_used <= 31 ~ "High Use")) %>% 
+  mutate(use_type = factor(use_type, ordered = TRUE, level = c('Low Use', 'Moderate Use', 'High Use'))) %>% 
+  inner_join(
+    daily_avg_steps, by = 'id'
+  )
+
+head(usage_types_vs_steps)
+```
+
+We will now summarize the average daily steps by *use_type*.
+
+```{r summarizing the table}
+usage_types_vs_steps_summary <- usage_types_vs_steps %>% 
+  group_by(use_type) %>% 
+  summarize(daily_avg_steps = mean(daily_avg_steps))
+
+usage_types_vs_steps_summary
+```
+
+Now we will plot this on a bar chart.
+
+```{r plotting bar chart}
+ggplot(usage_types_vs_steps_summary, aes(x = use_type, y = daily_avg_steps, fill = use_type)) +
+  geom_col() +
+  labs(title = "Daily Average Steps per Use Type", subtitle = "Comparing average daily steps to days used", x = "Usage", y = "Avg. Steps") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        plot.subtitle = element_text(hjust = 0.5),
+        legend.title = element_text(hjust = 0.5, face = "bold")) +
+  guides(fill = guide_legend(title = "Use Type")) +
+  scale_fill_brewer(palette = 'Pastel1')
+```
+
+**Observations:**
+
+* As we can see in the chart, our hypothesis was partially correct. *Low Use* users do not have the highest average daily steps out of the group. However, they do have higher average daily steps than the *Moderate Use* users. This could be due to the reasoning behind our hypothesis (i.e., that *Low Use* users generally only use their devices on days when they will exercise and, thus, take more steps), or it could be due to something else.
+
+# 6. ACT Phase
+
+After analyzing the provided data, we have the following recommendations for Bellabeat's executive and marketing teams:
+
+1. **Focus on users with lower BMIs:** What we have seen from the data is that users wearing smart devices are usually overweight. This means that users are probably purchasing and wearing these devices to aid them in their efforts to lose weight. However, the same does not occur for underweight individuals that wish to gain weight. Given that these individuals are not as focused on monitoring their activity and caloric intake because they can eat more, they probably don't feel the need to purchase a smart device. We see an opportunity here for Bellabeat to focus its marketing efforts on informing these individuals of how Bellabeat products can be of use in their lives, whether they wish to monitor specific calories/steps or not (e.g., use in monitoring sleep, stress).
+
+2. **Focus on increasing smart device usage in period of no exercise or activity:** The data tells us that, to a certain degree, users that wear their devices less often generally use these devices when they are exercising or moving more. This means that there is an growth opportunity for Bellabeat in informing users of the benefits of using their products (i.e., Time, Leaf, Spring) in periods of no exercise or reduced movement for things like sleep quality, stress, and hydration.
+
+# 7. REFERENCES
+
+Center for Disease Control and Prevention (August 27, 2021). *About Adult BMI*. CDC. Retrieved on January 20, 2022, from: https://www.cdc.gov/healthyweight/assessing/bmi/adult_bmi/index.html
+
+Google. (n.d.). *Ask Questions to Make Data-Driven Decisions* [MOOC]. Coursera. 
+Retrieved on January 20, 2022, from:
+https://www.coursera.org/learn/ask-questions-make-decisions?specialization=google-data-analytics
+
+Lacasa, M. (2021). *Captsone - Case Study Bellabeat*. Kaggle. Retrieved on January 20, 2022, from: https://www.kaggle.com/macarenalacasa/capstone-case-study-bellabeat/notebook
+
+Möbius (n.d.). *FitBit Fitness Tracker Data*. Kaggle. Retrieved on January 20, 2022, from:
+https://www.kaggle.com/arashnic/fitbit
+
+University of North Texas – UNT (July 20, 2021). *Understanding Creative Commons*. UNT. Retrieved on January 20, 2022, from:
+https://clear.unt.edu/teaching-resources/copyright-guide/creative-commons
+
+Tudor-Locke CE, Bassett DR. *How many steps are enough? Pedometer-determined physical activity indices*. Sports Med. 2004;34(1):1–8. doi: 10.2165/00007256-200434010-00001.
+
